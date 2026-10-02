@@ -1,0 +1,17 @@
+---
+import Blobs from "./Blobs.astro";
+import Nav from "./Nav.astro";
+import Heading from "./Heading.astro";
+import Txt from "./Txt.astro";
+const { current = "", eyebrow, l1, l2, sub } = Astro.props;
+---
+<section class="hero inner">
+  <Blobs />
+  <Nav current={current} />
+  <div class="hero-body">
+    <p class="eyebrow">{eyebrow}</p>
+    <Heading as="h1" l1={l1} l2={l2} class="rise" indent="12%" />
+    {sub && <p class="sub"><Txt s={sub} /></p>}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,6 @@
+---
+// Renders text, wrapping any [bracketed] part as a flagged yellow placeholder.
+const { s, plain = false } = Astro.props;
+const parts = String(s).split(/(\[[^\]]+\])/);
+---
+{parts.map((p) => (/^\[[^\]]+\]$/.test(p) ? <mark data-ph class={plain ? "plain" : undefined}>{p}</mark> : p))}

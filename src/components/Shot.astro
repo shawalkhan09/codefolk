@@ -1,0 +1,12 @@
+---
+// shot: { src, srcset?, alt, sample?, width?, height? }. width/height reserve space (CLS); ratio drives the box.
+const { shot, label = "Screenshot placeholder", ratio = "16/10", sizes = "(min-width:1024px) 33vw, (min-width:700px) 50vw, 100vw" } = Astro.props;
+const [rw, rh] = ratio.split("/").map(Number);
+const width = shot?.width ?? rw * 100;
+const height = shot?.height ?? rh * 100;
+---
+<div class="shot" style={`aspect-ratio:${ratio}`}>
+  {shot?.src
+    ? <><img src={shot.src} srcset={shot.srcset} sizes={shot.srcset ? sizes : undefined} alt={shot.alt || ""} width={width} height={height} loading="lazy" decoding="async" />{shot.sample && <span class="sample">Sample data</span>}</>
+    : <span data-ph>{label}</span>}
+</div>

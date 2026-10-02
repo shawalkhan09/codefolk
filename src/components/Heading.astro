@@ -1,0 +1,7 @@
+---
+// Two-line staggered heading. Set --indent to override the second-line offset.
+const { as: Tag = "h2", l1, l2, class: cls = "", indent } = Astro.props;
+---
+<Tag class:list={["display", cls]} style={indent ? `--indent:${indent}` : undefined}>
+  <span><Fragment set:html={l1} /></span>{l2 && <span class="l2"><Fragment set:html={l2} /></span>}
+</Tag>

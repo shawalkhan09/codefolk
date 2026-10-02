@@ -1,0 +1,45 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "../styles/global.css";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import grotesk from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
+import ContactFooter from "../components/ContactFooter.astro";
+import Loader from "../components/Loader.astro";
+import { site } from "../site";
+const { title, description, current = "", form = true, l1, l2 } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" as="font" type="font/woff2" href={interLatin} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={grotesk} crossorigin />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+  </head>
+  <body>
+    <Loader name={site.name} />
+    <main><slot /></main>
+    <ContactFooter l1={l1} l2={l2} showForm={form} />
+    <script>
+      const els = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) els.forEach((e) => e.classList.add("in"));
+      else {
+        const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+        els.forEach((e) => io.observe(e));
+      }
+    </script>
+  </body>
+</html>

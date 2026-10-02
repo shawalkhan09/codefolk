@@ -1,0 +1,87 @@
+---
+import Txt from "./Txt.astro";
+import Heading from "./Heading.astro";
+import { site, waHref, igHref } from "../site";
+const { l1 = "Got a task that", l2 = "eats your day?", showForm = true } = Astro.props;
+const types = ["Restaurant", "Academy or school", "Real estate", "Invoicing and stock", "Madrassa", "Other"];
+---
+<section id="contact" class:list={["panel", "contact", !showForm && "foot-only"]}>
+  <div class="glow g-blue anim" aria-hidden="true"></div>
+  <div class="glow g-mint anim" aria-hidden="true"></div>
+  {showForm && (
+    <div class="contact-grid">
+      <div class="reveal">
+        <Heading l1={l1} l2={l2} />
+        <p class="lede">Tell us how it works today. We will show you a 15 minute walkthrough against your own process. We reply within one working day.</p>
+        <a class="ag-link outline-btn" href={waHref}>Message us on WhatsApp <Txt s={site.whatsappDisplay} /></a>
+      </div>
+      <form id="enquiry" data-endpoint={site.formEndpoint} novalidate>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+        <div class="field"><label for="f-biz">Business and city</label><input id="f-biz" name="business" type="text" autocomplete="organization" required /></div>
+        <div class="field"><label for="f-type">What kind of business?</label>
+          <select id="f-type" name="business_type">{types.map((t) => <option>{t}</option>)}</select></div>
+        <div class="field"><label for="f-contact">WhatsApp number or email</label><input id="f-contact" name="contact" type="text" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required /></div>
+        <div class="field"><label for="f-msg">What do you want to improve?</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+        <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label class="consent" for="f-consent"><input id="f-consent" name="consent" type="checkbox" />OK to contact me on WhatsApp about this enquiry.</label>
+        <button class="btn" type="submit">Request a demo or quote</button>
+        <p class="status" role="status" aria-live="polite"></p>
+        <p class="fine">We only contact you about this enquiry, and you can ask us to stop at any time. See our <a href="/privacy/">privacy policy</a>.</p>
+      </form>
+    </div>
+  )}
+  <footer>
+    <a class="wm" href="/"><Txt s={site.name} plain /></a>
+    <nav aria-label="Footer">
+      {[["Work", "/work/"], ["Restaurants", "/restaurants/"], ["About", "/about/"], ["Contact", "/contact/"], ["Privacy", "/privacy/"]].map(([l, h]) => <a class="ag-link" href={h}>{l}</a>)}
+    </nav>
+    <nav aria-label="Social" class="social"><a class="ag-link" href={waHref}>WhatsApp</a><a class="ag-link" href={igHref}>Instagram</a></nav>
+    <p class="small"><span>{site.location}</span><span><Txt s={`© ${site.year} ${site.name}. All rights reserved.`} /></span></p>
+  </footer>
+</section>
+
+<script>
+  const form = document.getElementById("enquiry") as HTMLFormElement | null;
+  if (form) {
+    const status = form.querySelector(".status") as HTMLElement;
+    const btn = form.querySelector("button") as HTMLButtonElement;
+    const say = (msg: string, kind: "ok" | "err") => {
+      status.textContent = msg;
+      status.dataset.kind = kind;
+          };
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const get = (k: string) => String(f.get(k) || "").trim();
+      if (get("company_website")) return; // honeypot
+      const contact = get("contact");
+      if (!get("name") || !get("business") || !(contact.includes("@") || contact.replace(/\D/g, "").length >= 7)) {
+        return say("Please add your name, business and city, and a WhatsApp number or email.", "err");
+      }
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) return say("The form is not connected yet. Please message us on WhatsApp instead.", "err");
+      const consent = form.querySelector<HTMLInputElement>("#f-consent")!.checked;
+      btn.disabled = true;
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name: get("name"), business: get("business"), business_type: get("business_type"),
+            contact, message: get("message"),
+            whatsapp_consent: consent ? "yes" : "no",
+            consent_text: "OK to contact me on WhatsApp about this enquiry.",
+            page: location.href, submitted_at: new Date().toISOString(),
+          }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        say("Thank you. We have your enquiry and will reply within one working day.", "ok");
+      } catch {
+        say("Sorry, that did not send. Please try again, or message us on WhatsApp.", "err");
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
