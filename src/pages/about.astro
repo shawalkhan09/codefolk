@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Heading from "../components/Heading.astro";
+import Shot from "../components/Shot.astro";
+import Txt from "../components/Txt.astro";
+import { team } from "../site";
+
+const points = [
+  ["One owner for every client", "You always know who to talk to, and nothing gets lost between us."],
+  ["Scope in writing", "We agree what is included before work starts, and anything extra is quoted separately."],
+  ["Honest about limits", "If something is not built or not tested, we say so before you decide."],
+];
+const links = (m: (typeof team)[number]) => ([["Website", m.website], ["GitHub", m.github], ["LinkedIn", m.linkedin]] as [string, string | null][]).filter(([, h]) => h !== null);
+---
+<Base title="About" description="A small team that builds the software, sets it up and teaches your staff to use it." current="/about/" l1="Want to talk" l2="to the team?">
+  <PageHero current="/about/" eyebrow="About" l1="Three people," l2="one workflow at a time" sub="A small team that builds the software, sets it up and teaches your staff to use it." />
+  <section class="sec">
+    <p class="about-intro reveal"><Txt s="[Two or three sentences on why you started and who you are: friends and engineers from Peshawar, building practical software for local businesses.]" /></p>
+    <div class="cards people reveal">
+      {team.map((m) => (
+        <article class="card">
+          <Shot ratio="4/5" label="Photo placeholder" shot={m.photo ? { ...m.photo, alt: m.name } : null} sizes="(min-width:1024px) 30vw, (min-width:700px) 45vw, 90vw" />
+          <h2 class="pn"><Txt s={m.name} /></h2>
+          <p class="role">{m.role}</p>
+          <div class="pills">
+            {links(m).map(([l, h]) => h
+              ? <a class="pill ag-link" href={h} rel="noopener" target="_blank">{l}</a>
+              : <span class="pill" data-ph>{l}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="panel">
+    <div class="glow g-mint anim" aria-hidden="true"></div>
+    <Heading class="reveal" l1="How we" l2="work with you" />
+    <div class="points reveal">{points.map(([t, d]) => <div><h3>{t}</h3><p>{d}</p></div>)}</div>
+  </section>
+</Base>

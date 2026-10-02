@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Txt from "../components/Txt.astro";
+import { site } from "../site";
+const sections = [
+  ["What we collect", "When you send an enquiry we collect your name, your business and city, your WhatsApp number or email, and the message you write. We also record the page you sent it from and whether you ticked the WhatsApp consent box."],
+  ["How we use it", "Only to reply to your enquiry and to prepare a demo or quote for your business."],
+  ["WhatsApp and other contact", "We contact you on WhatsApp only if you ticked the consent box on the form. You can ask us to stop at any time and we will."],
+  ["Sharing", "We do not sell your data. We share it only with the tools we use to run the site and reply to you, and only as needed. [List the form, hosting and messaging tools used.]"],
+  ["Keeping and deleting your data", "We keep enquiries only as long as we need them. [Retention period.] To have your details deleted, email us and we will remove them."],
+  ["Contact", `Questions about this policy: ${site.privacyEmail}`],
+];
+---
+<Base title="Privacy policy" description="What we collect, how we use it and how to have it deleted." form={false}>
+  <PageHero eyebrow="Legal" l1="Privacy" l2="policy" sub={`Plain language, no tricks. Last updated ${site.privacyUpdated}.`} />
+  <section class="sec">
+    <div class="prose reveal">{sections.map(([h, p]) => <div><h2>{h}</h2><p><Txt s={p} /></p></div>)}</div>
+  </section>
+</Base>

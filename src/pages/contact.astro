@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Txt from "../components/Txt.astro";
+import { site, waHref, igHref } from "../site";
+---
+<Base title="Contact" description="Request a demo or a quote. We reply within one working day." current="/contact/" l1="Request a demo" l2="or a quote">
+  <PageHero current="/contact/" eyebrow="Contact" l1="Tell us how it" l2="works today" sub="Request a demo or a quote. We reply within one working day." />
+  <section class="sec" style="padding-bottom:60px">
+    <div class="cards details reveal">
+      <div class="card"><dl><dt>WhatsApp</dt><dd><a href={waHref}><Txt s={site.whatsappDisplay} /></a></dd></dl></div>
+      <div class="card"><dl><dt>Instagram</dt><dd><a href={igHref}><Txt s={site.instagramDisplay} /></a></dd></dl></div>
+      <div class="card"><dl><dt>Where</dt><dd>{site.location}</dd></dl></div>
+    </div>
+  </section>
+</Base>

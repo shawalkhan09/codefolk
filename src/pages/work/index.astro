@@ -1,0 +1,34 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { projects } from "../../lib/projects";
+import { systems } from "../../site";
+---
+<Base title="Our work" description="Live systems we have set up for real businesses, from restaurant ordering to academy management." current="/work/" l1="Have a workflow" l2="like these?">
+  <PageHero current="/work/" eyebrow="Work" l1="Live systems," l2="real customers" sub="The systems we have set up and how businesses use them. More are being added." />
+  <section class="sec">
+    <div class="chips" role="group" aria-label="Filter by system">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All systems</button>
+      {Object.entries(systems).map(([k, v]) => <button class="chip" type="button" data-filter={k} aria-pressed="false">{v}</button>)}
+    </div>
+    <div class="grid2" id="grid">{projects.map((p) => <ProjectCard project={p} level={2} />)}</div>
+    <p class="empty" id="empty" hidden={projects.length > 0}>{projects.length ? "No projects in this category yet." : "Projects are being added. Check back soon."}</p>
+  </section>
+</Base>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>(".chip")];
+  const cards = [...document.querySelectorAll<HTMLElement>("#grid .project")];
+  const empty = document.getElementById("empty")!;
+  const apply = (f: string) => {
+    let n = 0;
+    cards.forEach((c) => { const show = f === "all" || c.dataset.system === f; c.hidden = !show; if (show) n++; });
+    chips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === f)));
+    empty.hidden = n > 0 || cards.length === 0;
+    if (!cards.length) empty.hidden = false;
+  };
+  chips.forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter!)));
+  const q = new URLSearchParams(location.search).get("system");
+  if (q && chips.some((b) => b.dataset.filter === q)) apply(q);
+</script>

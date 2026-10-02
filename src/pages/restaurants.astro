@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Heading from "../components/Heading.astro";
+import Shot from "../components/Shot.astro";
+import Txt from "../components/Txt.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../lib/projects";
+
+const problems = [
+  ["Orders passed by hand", "Orders are written down or shouted across the room, and details get lost between the table and the kitchen."],
+  ["Menu changes are painful", "A price change or a sold-out dish means reprinting menus or telling every staff member one by one."],
+  ["No single record", "There is no one place that shows what was ordered, when, and what state it is in right now."],
+];
+const how = [
+  ["1. The customer orders", "The customer picks from your menu. [CONFIRM WITH MUZAMIL: QR menu, online ordering, or both]"],
+  ["2. Staff see it instantly", "The order appears on the staff screen with the items and table. [CONFIRM WITH MUZAMIL]"],
+  ["3. The order moves along", "Staff mark it as preparing and ready, so everyone sees the same status. [CONFIRM WITH MUZAMIL]"],
+];
+const includes = ["Your menu imported from our template", "Your branding applied", "Staff training on real tasks", "An acceptance checklist you sign off on", "Launch support for issues within the agreed scope"];
+const faq = [
+  ["How do customers place an order?", "[CONFIRM WITH MUZAMIL: QR menu, online ordering, or both]"],
+  ["What do my staff see?", "[CONFIRM WITH MUZAMIL: staff screen behaviour]"],
+  ["How does an order move from new to done?", "[CONFIRM WITH MUZAMIL: order status flow]"],
+  ["Do we need special hardware?", "[CONFIRM WITH MUZAMIL: hardware]"],
+  ["Does it work without internet?", "[CONFIRM WITH MUZAMIL: offline use]"],
+  ["Can I change menu prices myself?", "[CONFIRM WITH MUZAMIL: price editing]"],
+  ["Will my staff understand it?", "We train your staff on real tasks before launch, and you test the workflow against an acceptance checklist we agree with you first."],
+  ["How long does setup take?", "[X] days from kickoff. [CONFIRM WITH MUZAMIL]"],
+];
+const set = projects.filter((p) => p.system === "restaurant").slice(0, 2);
+---
+<Base title="Restaurant ordering setup" description="An ordering workflow set up for your restaurant: menu imported, branding applied and staff trained." current="/restaurants/" l1="Want this for" l2="your restaurant?">
+  <PageHero current="/restaurants/" eyebrow="Restaurants" l1="Orders that reach" l2="your staff, cleanly" sub="We set up an ordering workflow for your restaurant, import your menu, apply your branding and train your team." />
+
+  <section class="sec">
+    <Heading class="reveal" l1="Where restaurant" l2="orders go wrong" />
+    <div class="cards reveal">
+      {problems.map(([t, d], i) => <article class="card problem"><span class="num">0{i + 1}</span><h3>{t}</h3><p>{d}</p></article>)}
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="glow g-blue anim" aria-hidden="true"></div>
+    <p class="eyebrow">How it works</p>
+    <Heading class="reveal" l1="From the customer’s order" l2="to your staff screen" />
+    <div class="shots3 reveal">
+      {how.map(([t, d]) => <div><Shot ratio="4/3" /><h3>{t}</h3><p><Txt s={d} /></p></div>)}
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="split reveal">
+      <div>
+        <Heading l1="What setup" l2="includes" />
+        <ul class="checks">{includes.map((i) => <li>{i}</li>)}</ul>
+      </div>
+      <div class="info">
+        <article class="card"><h3>What we need from you</h3><p>A named decision maker, your menu and prices, your branding, a device with an internet connection, and staff available for training.</p></article>
+        <article class="card"><h3>Not included unless quoted</h3><p>Hardware, printer and payment gateway integration, delivery platforms, offline mode and extra branches.</p></article>
+      </div>
+    </div>
+  </section>
+
+  {set.length > 0 && (
+    <section class="sec" style="padding-top:0">
+      <h2 class="display small-h reveal"><span>Restaurants we have set up</span></h2>
+      <div class="grid2 reveal">{set.map((p) => <ProjectCard project={p} showSystem={false} />)}</div>
+    </section>
+  )}
+
+  <section class="sec" style="padding-top:0">
+    <h2 class="display small-h reveal"><span>Questions owners ask</span></h2>
+    <div class="faq reveal">
+      {faq.map(([q, a]) => <details><summary>{q}</summary><p><Txt s={a} /></p></details>)}
+    </div>
+  </section>
+</Base>
