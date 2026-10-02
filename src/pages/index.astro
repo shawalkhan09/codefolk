@@ -1,0 +1,111 @@
+---
+import Base from "../layouts/Base.astro";
+import Blobs from "../components/Blobs.astro";
+import Nav from "../components/Nav.astro";
+import Heading from "../components/Heading.astro";
+import Txt from "../components/Txt.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../lib/projects";
+
+const intro = [["Restaurants", "/restaurants/"], ["Academies and schools", "/work/?system=academy"], ["Real estate", "/work/?system=real-estate"], ["Invoicing and stock", "/work/?system=invoicing"], ["Madrassa management", "/work/?system=madrassa"]];
+const services = [
+  ["01", "var(--mint)", "Restaurant ordering", "An ordering workflow from the customer's action to the staff screen, with your menu imported, your branding applied and your team trained.", "/restaurants/"],
+  ["02", "var(--blue)", "Academy management", "Student registration and fee recording, set up with your existing student list imported, so records stop living in notebooks.", "/work/?system=academy"],
+  ["03", "var(--ink)", "Real estate operations", "Listings, enquiries and inventory in one place, scoped around the workflow your team actually uses.", "/work/?system=real-estate"],
+];
+const steps = [
+  ["Scope", "We agree one workflow, your branch count and what you provide. It is written down before any work starts."],
+  ["Configure", "We import your menu or student list, apply your branding and test the workflow on a staging copy."],
+  ["Train and check", "Your staff are trained on real tasks, then you test against an acceptance checklist we agreed in step one."],
+  ["Launch and support", "You go live, and we stay in touch with regular check-ins after launch and support for issues within the agreed scope."],
+];
+const featured = projects.slice(0, 2);
+---
+<Base title="Software that fits your business" description="Practical software, setup and training for local businesses in Peshawar and remote. Restaurant ordering, academy management and real estate operations.">
+  <section class="hero home">
+    <Blobs />
+    <Nav />
+    <div class="hero-body">
+      <Heading as="h1" l1="Software that" l2="fits your business" class="rise home-h1" indent="14%" />
+    </div>
+    <div class="hero-foot fadein">
+      <div>
+        <p class="proof"><span class="dot" aria-hidden="true"></span><span><Txt s="[X] live systems running for real customers" /></span></p>
+        <div class="pills"><span class="pill">Software</span><span class="pill">Setup</span><span class="pill">Training</span></div>
+      </div>
+      <div class="hero-cta">
+        <p class="sub">We help business owners manage everyday work with practical software, setup and training.</p>
+        <div class="row">
+          <a class="btn" href="/contact/">Request a demo <span aria-hidden="true">↗</span></a>
+          <a class="textlink" href="/work/"><u>See our work</u></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="intro reveal">
+      <p class="statement">Most small businesses do not need more software. They need one workflow that works, set up properly and taught to the people who use it every day.</p>
+      <div class="pills">{intro.map(([l, h]) => <a class="pill ag-link" href={h}>{l}</a>)}</div>
+    </div>
+    <div class="numbers reveal">
+      <div><div class="n"><Txt s="[X]" /></div><div class="l">live systems</div></div>
+      <div><div class="n"><Txt s="[X]" /></div><div class="l">businesses served</div></div>
+      <div><div class="n"><Txt s="[X]" /></div><div class="l">cities</div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="services">
+    <Heading class="reveal" l1="What we" l2="set up for you" />
+    <div class="cards reveal">
+      {services.map(([n, c, t, d, h]) => (
+        <article class="card svc">
+          <div class="top"><span>{n}</span><i style={`background:${c}`}></i></div>
+          <div><h3>{t}</h3><p>{d}</p></div>
+          <a class="more ag-link" href={h}>Learn more <span aria-hidden="true">↗</span></a>
+        </article>
+      ))}
+    </div>
+    <p class="after-cards"><a class="btn outline" href="/work/">View all systems <span aria-hidden="true">↗</span></a></p>
+  </section>
+
+  {featured.length === 2 && (
+    <section class="panel" id="work">
+      <div class="glow g-blue anim" aria-hidden="true"></div>
+      <p class="eyebrow">Our work</p>
+      <Heading class="reveal" l1="Live systems," l2="not mockups" />
+      <div class="tiles reveal">{featured.map((p) => <ProjectCard project={p} variant="dark" showSystem={false} />)}</div>
+    </section>
+  )}
+
+  <section class="sec">
+    <Heading class="reveal" l1="How setup" l2="actually works" />
+    <p class="sub" style="color:var(--muted);margin-top:calc(-1 * clamp(20px,3vw,32px))">Four steps, each with something you can check before we move on.</p>
+    <p class="days"><Txt s="[X] days from kickoff" /></p>
+    <ol class="steps reveal">
+      {steps.map(([t, d], i) => <li><div class="n">0{i + 1}</div><h3>{t}</h3><p>{d}</p></li>)}
+    </ol>
+  </section>
+
+  <section class="panel" id="packages">
+    <div class="glow g-mint anim" aria-hidden="true"></div>
+    <p class="eyebrow">Packages</p>
+    <Heading class="reveal" l1="A fixed scope," l2="in writing" />
+    <p class="sub" style="margin-top:24px">Anything outside the package is estimated separately and approved by you before we start.</p>
+    <div class="packs reveal">
+      <article class="pack feat">
+        <div class="pack-top"><h3>Restaurant starter</h3><span class="badge">Start here</span></div>
+        <ul>
+          <li>One branch, one ordering workflow</li><li>Your menu imported from our template</li><li>One branding pass</li>
+          <li>Staff training sessions</li><li>Acceptance checklist and launch support</li>
+        </ul>
+        <a class="btn" href="/contact/">Get a quote <span aria-hidden="true">↗</span></a>
+        <p class="note">Not included unless quoted: hardware, printer and payment gateway integration, delivery platforms, offline mode and extra branches.</p>
+      </article>
+      <div class="pack-side">
+        <article class="pack"><h3>Academy starter</h3><p>Student import, registration and fee recording. Extra features are estimated separately.</p><a class="qlink" href="/contact/"><u>Get a quote</u></a></article>
+        <article class="pack"><h3>Real estate</h3><p>Listings, enquiries and inventory. We set up the software. We do not promise sales or investment returns.</p><a class="qlink" href="/contact/"><u>Get a quote</u></a></article>
+      </div>
+    </div>
+  </section>
+</Base>
