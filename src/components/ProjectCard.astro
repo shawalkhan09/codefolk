@@ -1,0 +1,16 @@
+---
+import Shot from "./Shot.astro";
+import Txt from "./Txt.astro";
+import { systems } from "../site";
+import { clientOf } from "../lib/projects";
+const { project: p, variant = "light", showSystem = true, level = 3 } = Astro.props;
+const H = `h${level}`;
+---
+<article class:list={["project", variant, variant === "light" && "card"]} data-system={p.system}>
+  <Shot shot={p.screenshots[0]} />
+  {showSystem && <p class="tag">{systems[p.system]}</p>}
+  <H class="pt"><a href={`/work/${p.slug}/`}><Txt s={p.name} /></a></H>
+  <p class="client"><Txt s={clientOf(p)} /></p>
+  {p.outcome && <p class="outcome"><Txt s={p.outcome} /></p>}
+  {variant === "dark" && <a class="view" href={`/work/${p.slug}/`}>View project <span aria-hidden="true">↗</span></a>}
+</article>

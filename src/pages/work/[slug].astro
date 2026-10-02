@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Heading from "../../components/Heading.astro";
+import Shot from "../../components/Shot.astro";
+import Txt from "../../components/Txt.astro";
+import { projects, clientOf } from "../../lib/projects";
+import { systems } from "../../site";
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+const cleared = p.permission === "cleared";
+---
+<Base title={`${p.name}: case study`} description={p.outcome} current="/work/" l1="Want results" l2="like this?">
+  <PageHero current="/work/" eyebrow="Case study" l1={p.name} l2={p.outcome}>
+    <p class="sub" style="margin-top:28px"><Txt s={clientOf(p)} /></p>
+  </PageHero>
+
+  <section class="sec">
+    <dl class="meta reveal">
+      <div><dt>Client</dt><dd><Txt s={clientOf(p)} /></dd></div>
+      <div><dt>System</dt><dd>{systems[p.system]}</dd></div>
+      <div><dt>Year</dt><dd><Txt s={p.year} /></dd></div>
+      <div><dt>Permission to publish</dt><dd>{cleared ? "Cleared" : <Txt s="[Not cleared]" />}</dd></div>
+    </dl>
+    <div class="two reveal">
+      <div><h2>The problem</h2><p><Txt s={p.problem} /></p></div>
+      <div><h2>What we built</h2><p><Txt s={p.built} /></p></div>
+    </div>
+    <div class="shots reveal">{p.screenshots.map((s) => <Shot shot={s} ratio="4/3" />)}</div>
+  </section>
+
+  <section class="panel">
+    <div class="glow g-blue anim" aria-hidden="true"></div>
+    <p class="eyebrow">Results</p>
+    <div class="results reveal">{p.results.map((r) => <div><div class="n"><Txt s={r.value} /></div><div class="l"><Txt s={r.label} /></div></div>)}</div>
+    <figure class="quote reveal" style="margin-inline:0">
+      {p.quote
+        ? <><p>“{p.quote.text}”</p><cite>{p.quote.attribution}</cite></>
+        : !cleared && <><p><Txt s="[Client quote, only with their permission.]" /></p><cite><Txt s="[Name, role, business]" /></cite></>}
+    </figure>
+  </section>
+
+  <p class="backrow"><a class="btn outline" href="/work/">Back to all work</a></p>
+</Base>

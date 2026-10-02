@@ -1,0 +1,260 @@
+[
+  {
+    "slug": "restaurant-one",
+    "name": "[Project name]",
+    "client": null,
+    "system": "restaurant",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  },
+  {
+    "slug": "academy-one",
+    "name": "[Project name]",
+    "client": null,
+    "system": "academy",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  },
+  {
+    "slug": "real-estate-one",
+    "name": "[Project name]",
+    "client": null,
+    "system": "real-estate",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  },
+  {
+    "slug": "invoicing-one",
+    "name": "[Project name]",
+    "client": null,
+    "system": "invoicing",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  },
+  {
+    "slug": "madrassa-one",
+    "name": "[Project name]",
+    "client": null,
+    "system": "madrassa",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  },
+  {
+    "slug": "restaurant-two",
+    "name": "[Project name]",
+    "client": null,
+    "system": "restaurant",
+    "year": "[Year]",
+    "permission": "pending",
+    "outcome": "[One-line outcome]",
+    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
+    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "screenshots": [
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      },
+      {
+        "src": "",
+        "alt": "",
+        "sample": false
+      }
+    ],
+    "results": [
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      },
+      {
+        "value": "[X]",
+        "label": "[What it measures]"
+      }
+    ],
+    "quote": null
+  }
+]
