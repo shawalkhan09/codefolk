@@ -1,0 +1,198 @@
+---
+// src/components/Loader.astro
+// Full-screen intro loader. Place <Loader name={...} /> as the FIRST child of <body>.
+interface Props {
+  name?: string;
+}
+const { name = '[Agency Name]' } = Astro.props;
+const letters = [...name];
+---
+
+<div id="ag-loader" class="ag-ld" role="status" aria-live="polite" aria-label="Loading">
+  <div class="ag-ld-panel ag-ld-top"></div>
+  <div class="ag-ld-panel ag-ld-bottom"></div>
+
+  <div class="ag-ld-fx" aria-hidden="true">
+    <span class="ag-ld-spin"></span>
+    <span class="ag-ld-blob ag-ld-b1"></span>
+    <span class="ag-ld-blob ag-ld-b2"></span>
+    <span class="ag-ld-line ag-ld-l1"></span>
+    <span class="ag-ld-line ag-ld-l2"></span>
+  </div>
+
+  <div class="ag-ld-content">
+    <svg class="ag-ld-mark" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <rect class="ag-ld-draw" x="6" y="6" width="52" height="52" rx="8" pathLength="1" stroke="#EAF4F2" stroke-width="2.5" />
+      <rect class="ag-ld-fill" x="22" y="22" width="20" height="20" rx="2" fill="#2EE6C5" />
+    </svg>
+    <div class="ag-ld-name" aria-hidden="true">
+      {letters.map((c, i) => <span style={`--i:${i}`}>{c === ' ' ? ' ' : c}</span>)}
+    </div>
+    <div class="ag-ld-meter" aria-hidden="true">
+      <span class="ag-ld-num" data-num>000</span>
+      <span class="ag-ld-track"><span class="ag-ld-bar" data-bar></span></span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var d = document, h = d.documentElement;
+    var el = d.getElementById('ag-loader');
+    if (!el) return;
+
+    var seen = false;
+    try { seen = sessionStorage.getItem('ag-loaded') === '1'; } catch (e) {}
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Return visits in the same session, and reduced-motion users, skip the loader entirely.
+    if (seen || reduce) { el.parentNode.removeChild(el); return; }
+
+    h.classList.add('is-loading');
+
+    var bar = el.querySelector('[data-bar]');
+    var num = el.querySelector('[data-num]');
+    var MIN = 1800;   // shortest time the loader stays, so the animation can finish
+    var MAX = 6000;   // never block the site longer than this
+    var start = performance.now();
+    var loaded = d.readyState === 'complete';
+    var p = 0, finished = false;
+
+    window.addEventListener('load', function () { loaded = true; });
+
+    function render() {
+      var v = Math.min(100, Math.round(p));
+      bar.style.transform = 'scaleX(' + (p / 100) + ')';
+      num.textContent = ('00' + v).slice(-3);
+    }
+
+    function leave() {
+      if (finished) return;
+      finished = true;
+      p = 100; render();
+      try { sessionStorage.setItem('ag-loaded', '1'); } catch (e) {}
+      h.classList.remove('is-loading');   // the page's own entrance animations start now
+      el.classList.add('is-leaving');
+      setTimeout(function () {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 1500);
+    }
+
+    function tick(now) {
+      var t = now - start;
+      var timeCap = Math.min(100, (t / MIN) * 100);   // never run ahead of the animation
+      var target = loaded ? timeCap : Math.min(90, 90 * (1 - Math.exp(-t / 900)), timeCap);
+      p += (target - p) * 0.12;
+      if (loaded && t >= MIN && 100 - p < 1.5) p = 100;
+      render();
+      if ((p >= 100 && t >= MIN) || t >= MAX) { leave(); return; }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+</script>
+
+<style is:global>
+  /* Hold the page's own animations until the loader leaves, and lock scroll meanwhile */
+  html.is-loading { overflow: hidden; }
+  html.is-loading body > :not(#ag-loader),
+  html.is-loading body > :not(#ag-loader) * { animation-play-state: paused !important; }
+
+  .ag-ld {
+    position: fixed; inset: 0; z-index: 9999; overflow: hidden;
+    color: #EAF4F2; font-family: 'Space Grotesk Variable','Space Grotesk', system-ui, sans-serif;
+    /* safety net: if scripts fail, the loader hides itself after 7s */
+    animation: ag-ld-failsafe 0s linear 7s forwards;
+  }
+  @keyframes ag-ld-failsafe { to { visibility: hidden; pointer-events: none; } }
+
+  .ag-ld-panel {
+    position: absolute; left: 0; right: 0; height: 50.2%; background: #060F0F;
+    transition: transform .95s cubic-bezier(.76, 0, .24, 1) .25s;
+  }
+  .ag-ld-top { top: 0; }
+  .ag-ld-bottom { bottom: 0; }
+  .ag-ld.is-leaving .ag-ld-top { transform: translateY(-101%); }
+  .ag-ld.is-leaving .ag-ld-bottom { transform: translateY(101%); }
+
+  .ag-ld-fx { position: absolute; inset: 0; transition: opacity .5s ease; }
+  .ag-ld-fx > span { position: absolute; display: block; }
+  .ag-ld-spin {
+    top: 50%; left: 50%; width: 1100px; height: 1100px; margin: -550px 0 0 -550px;
+    border-radius: 50%; opacity: .3; filter: blur(70px);
+    background: conic-gradient(from 0deg, transparent 0%, #2EE6C5 18%, transparent 38%, #1B6BFF 62%, transparent 82%);
+    animation: ag-ld-spin 14s linear infinite;
+  }
+  .ag-ld-blob { border-radius: 50%; filter: blur(52px); }
+  .ag-ld-b1 {
+    top: 8%; left: 16%; width: 46%; height: 62%; opacity: .75;
+    background: radial-gradient(circle, #2EE6C5 0%, transparent 68%);
+    animation: ag-ld-d1 7s ease-in-out infinite alternate;
+  }
+  .ag-ld-b2 {
+    bottom: 2%; right: 10%; width: 40%; height: 56%; opacity: .7;
+    background: radial-gradient(circle, #1B6BFF 0%, transparent 68%);
+    animation: ag-ld-d2 9s ease-in-out infinite alternate;
+  }
+  .ag-ld-line { top: 0; bottom: 0; width: 1px; overflow: hidden; background: rgba(234, 244, 242, .09); }
+  .ag-ld-l1 { left: 7%; }
+  .ag-ld-l2 { right: 7%; }
+  .ag-ld-line::after {
+    content: ''; position: absolute; left: 0; top: -200px; width: 1px; height: 200px;
+    background: linear-gradient(to bottom, transparent, #2EE6C5, transparent);
+    animation: ag-ld-run 2.6s linear infinite;
+  }
+  .ag-ld-l2::after { background: linear-gradient(to bottom, transparent, #1B6BFF, transparent); animation-delay: -1.3s; }
+
+  .ag-ld-content {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 30px;
+    transition: opacity .4s ease, transform .7s ease;
+  }
+  .ag-ld.is-leaving .ag-ld-content { opacity: 0; transform: scale(1.05); }
+  .ag-ld.is-leaving .ag-ld-fx { opacity: 0; }
+
+  .ag-ld-mark { filter: drop-shadow(0 0 18px rgba(46, 230, 197, .45)); animation: ag-ld-breathe 2.4s ease-in-out infinite; }
+  .ag-ld-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ag-ld-draw 1.2s cubic-bezier(.6, 0, .2, 1) .1s forwards; }
+  .ag-ld-fill { transform-box: fill-box; transform-origin: center; transform: scale(0); animation: ag-ld-pop .7s cubic-bezier(.2, .9, .3, 1.3) .9s forwards; }
+
+  .ag-ld-name {
+    font-weight: 300; font-size: clamp(22px, 3vw, 34px);
+    letter-spacing: .2em; text-transform: uppercase; text-align: center; max-width: 88vw; overflow-wrap: anywhere;
+  }
+  .ag-ld-name span {
+    display: inline-block; opacity: 0; transform: translateY(70%);
+    animation: ag-ld-up .8s cubic-bezier(.2, .7, .2, 1) forwards;
+    animation-delay: calc(.55s + var(--i) * .045s);
+  }
+
+  .ag-ld-meter {
+    display: flex; align-items: center; gap: 16px; width: min(320px, 72vw);
+    font-size: 13px; letter-spacing: .14em; color: rgba(234, 244, 242, .72);
+    opacity: 0; animation: ag-ld-fade .6s ease 1s forwards;
+  }
+  .ag-ld-num { min-width: 3ch; font-variant-numeric: tabular-nums; }
+  .ag-ld-track { position: relative; flex: 1; height: 1px; background: rgba(234, 244, 242, .18); }
+  .ag-ld-bar {
+    position: absolute; inset: 0; background: #2EE6C5; transform-origin: left center; transform: scaleX(0);
+    box-shadow: 0 0 12px rgba(46, 230, 197, .8);
+  }
+
+  @keyframes ag-ld-spin { to { transform: rotate(360deg); } }
+  @keyframes ag-ld-d1 { to { transform: translate3d(10%, 12%, 0) scale(1.2); } }
+  @keyframes ag-ld-d2 { to { transform: translate3d(-12%, -10%, 0) scale(1.15); } }
+  @keyframes ag-ld-run { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,100svh,0); } }
+  @keyframes ag-ld-draw { to { stroke-dashoffset: 0; } }
+  @keyframes ag-ld-pop { to { transform: scale(1); } }
+  @keyframes ag-ld-up { to { opacity: 1; transform: none; } }
+  @keyframes ag-ld-fade { to { opacity: 1; } }
+  @keyframes ag-ld-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .8; } }
+
+  /* phones: lighter blur, tighter tracking so long names still fit 320px */
+  @media (max-width: 699px) {
+    .ag-ld-spin { width: 640px; height: 640px; margin: -320px 0 0 -320px; filter: blur(36px); }
+    .ag-ld-blob { filter: none; }
+    .ag-ld-name { letter-spacing: .12em; font-size: clamp(18px, 6vw, 26px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .ag-ld { display: none; } }
+</style>
