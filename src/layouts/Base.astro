@@ -8,6 +8,7 @@ import ContactFooter from "../components/ContactFooter.astro";
 import Loader from "../components/Loader.astro";
 import { site } from "../site";
 const { title, description, current = "", form = true, l1, l2 } = Astro.props;
+const fullTitle = `${title} | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -15,11 +16,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />

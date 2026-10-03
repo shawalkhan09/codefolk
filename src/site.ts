@@ -1,6 +1,6 @@
 // Anything in [square brackets] renders as a yellow placeholder and is flagged by the build check.
 export const site = {
-  name: "[Agency Name]",
+  name: "Codefolk",
   year: "[Year]",
   whatsappDisplay: "+92 341 5653742",
   whatsappDigits: "923415653742", // e.g. "923001234567" -> links to wa.me
