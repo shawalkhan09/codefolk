@@ -1,5 +1,6 @@
 ---
 import Txt from "./Txt.astro";
+import Logo from "./Logo.astro";
 import Heading from "./Heading.astro";
 import { site, waHref, igHref } from "../site";
 const { l1 = "Got a task that", l2 = "eats your day?", showForm = true } = Astro.props;
@@ -31,7 +32,7 @@ const types = ["Restaurant", "Academy or school", "Real estate", "Invoicing and 
     </div>
   )}
   <footer>
-    <a class="wm" href="/"><Txt s={site.name} plain /></a>
+    <a class="wm" href="/" aria-label={`${site.name} home`}><Logo height={28} /></a>
     <nav aria-label="Footer">
       {[["Work", "/work/"], ["Restaurants", "/restaurants/"], ["About", "/about/"], ["Contact", "/contact/"], ["Privacy", "/privacy/"]].map(([l, h]) => <a class="ag-link" href={h}>{l}</a>)}
     </nav>

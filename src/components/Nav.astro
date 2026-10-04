@@ -1,14 +1,11 @@
 ---
-import Txt from "./Txt.astro";
+import Logo from "./Logo.astro";
 import { site } from "../site";
 const { current = "" } = Astro.props;
 const links = [["Work", "/work/"], ["Restaurants", "/restaurants/"], ["About", "/about/"]];
 ---
 <header class="nav" id="site-header">
-  <a class="wordmark" href="/">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" stroke="#EAF4F2" stroke-width="1.5"/><rect x="4.5" y="4.5" width="5" height="5" fill="#EAF4F2"/></svg>
-    <Txt s={site.name} plain />
-  </a>
+  <a class="wordmark" href="/" aria-label={`${site.name} home`}><Logo height={30} /></a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><span class="bars" aria-hidden="true"></span><span class="lbl">Menu</span></button>
   <nav id="site-menu" aria-label="Main">
     {links.map(([label, href]) => <a class="ag-link" href={href} aria-current={current === href ? "page" : undefined}>{label}</a>)}

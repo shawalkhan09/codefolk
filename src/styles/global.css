@@ -1,4 +1,4 @@
-:root{--ground:#060F0F;--light:#EEF3F2;--ink:#0A1413;--muted:#4B5E5B;--on-dark:#EAF4F2;--mint:#2EE6C5;--blue:#1B6BFF;--line:#CBD8D5;--card-line:#D3DEDC;--indent:10%;
+:root{--logo-accent:#2EE6C5;--ground:#060F0F;--light:#EEF3F2;--ink:#0A1413;--muted:#4B5E5B;--on-dark:#EAF4F2;--mint:#2EE6C5;--blue:#1B6BFF;--line:#CBD8D5;--card-line:#D3DEDC;--indent:10%;
   /* side padding: 20px on phones, 9% on large screens, content capped at 1520px and centred; notch-safe */
   --pad-base:max(20px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
   --pad:max(var(--pad-base),calc((100% - 1520px) / 2));
@@ -26,7 +26,7 @@ h3,.pt,.pn{font-family:'Space Grotesk Variable','Space Grotesk',sans-serif;font-
 .sub,.lede{max-width:440px;font-size:16px;line-height:1.65;color:rgba(234,244,242,.8)}
 
 /* sections */
-.sec{position:relative;padding:var(--sec-y) var(--pad);background:var(--light)}
+.sec{--logo-accent:#0A9C85;position:relative;padding:var(--sec-y) var(--pad);background:var(--light)}
 .sec>h2,.sec>.display{margin-bottom:clamp(36px,5vw,56px)}
 .panel{position:relative;overflow:hidden;margin:var(--pm);padding:var(--sec-y) var(--pad);border-radius:var(--pr);background:var(--ground);color:var(--on-dark)}
 .panel>*{position:relative}
@@ -41,7 +41,9 @@ h3,.pt,.pn{font-family:'Space Grotesk Variable','Space Grotesk',sans-serif;font-
 .hero.inner{min-height:360px;min-height:min(62svh,560px)}
 .nav{position:relative;z-index:5;min-height:72px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:8px 24px;color:var(--on-dark);font-size:15px}
 .nav a,footer a{text-decoration:none}
-.wordmark{position:relative;z-index:6;display:flex;align-items:center;gap:10px;min-height:44px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.wordmark{position:relative;z-index:6;display:flex;align-items:center;min-height:44px;min-width:44px;color:var(--on-dark)}
+.wordmark .cf-logo{display:block;height:30px;width:auto}
+@media (max-width:599px){.wordmark .cf-logo{height:24px}}
 .menu-btn{position:relative;z-index:6;display:inline-flex;align-items:center;gap:10px;min-height:44px;min-width:44px;padding:0 16px;border:1px solid rgba(234,244,242,.3);border-radius:999px;background:none;color:var(--on-dark);font:inherit;font-size:15px;cursor:pointer}
 .bars{width:18px;height:10px;border-block:1.5px solid currentColor;position:relative}
 .bars::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor}
@@ -294,7 +296,8 @@ form .btn{align-self:flex-start}
 footer{margin-top:clamp(64px,9vw,110px);padding:24px 0 calc(32px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:flex-start;gap:8px 32px;border-top:1px solid rgba(234,244,242,.12);font-size:15px;color:rgba(234,244,242,.78)}
 .foot-only{padding-top:clamp(32px,5vw,48px)}
 .foot-only footer{margin-top:0}
-footer .wm{display:inline-flex;align-items:center;min-height:44px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark);font-weight:500;font-size:13px}
+footer .wm{display:inline-flex;align-items:center;min-height:44px;min-width:44px;color:var(--on-dark)}
+footer .wm .cf-logo{height:28px;width:auto}
 footer nav{display:flex;flex-wrap:wrap;gap:0 8px}
 footer nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 8px;color:inherit}
 footer .social a{color:var(--on-dark)}

@@ -24,7 +24,7 @@ for (const w of [320, 375]) {
   await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#ag-loader");
   await wait(900);
-  const geo = await page.evaluate(() => { const n = document.querySelector(".ag-ld-name"), r = n.getBoundingClientRect(); return { l: r.left, r: r.right, vw: innerWidth, loading: document.documentElement.classList.contains("is-loading"), sw: document.scrollingElement.scrollWidth }; });
+  const geo = await page.evaluate(() => { const n = document.querySelector(".ag-ld-logo"), r = n.getBoundingClientRect(); return { l: r.left, r: r.right, vw: innerWidth, loading: document.documentElement.classList.contains("is-loading"), sw: document.scrollingElement.scrollWidth }; });
   ok(`loader ${w}: name fits width`, geo.l >= 0 && geo.r <= geo.vw && geo.sw <= geo.vw, JSON.stringify(geo));
   let max = 0, t0 = Date.now();
   while (Date.now() - t0 < 7000) { const n = await page.evaluate(() => { const e = document.querySelector("[data-num]"); return e ? +e.textContent : -1; }); if (n < 0) break; max = Math.max(max, n); await wait(60); }
