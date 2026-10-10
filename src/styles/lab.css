@@ -9,7 +9,9 @@ body{background:#060F0F;color:#EAF4F2;color-scheme:dark}
 .rule{height:1px;background:var(--hair);border:0;margin:0}
 
 /* ---------- SCENE 01 hero ---------- */
-[data-hero=nav]{position:absolute;top:0;left:0;right:0;z-index:6}
+[data-hero=nav]{position:fixed;top:0;left:0;right:0;z-index:6;pointer-events:none}
+[data-hero=nav] .nav{pointer-events:auto}
+[data-hero=nav] .nav.is-scrolled{position:relative;top:12px;left:auto;right:auto}
 .hz-reel{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;opacity:1;filter:none;z-index:0}
 .hz::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(6,15,15,.52) 0%,rgba(6,15,15,.28) 34%,rgba(6,15,15,.06) 68%,transparent 100%),linear-gradient(180deg,rgba(6,15,15,.16) 0%,transparent 38%,rgba(6,15,15,.24) 100%)}
 .hz>div:first-of-type,.hz .sysobj{position:relative;z-index:2}
