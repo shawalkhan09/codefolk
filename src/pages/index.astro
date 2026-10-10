@@ -1,111 +1,431 @@
 ---
+import "../styles/lab.css";
 import Base from "../layouts/Base.astro";
-import Blobs from "../components/Blobs.astro";
 import Nav from "../components/Nav.astro";
-import Heading from "../components/Heading.astro";
-import Txt from "../components/Txt.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import { projects } from "../lib/projects";
+import { featuredProjects } from "../lib/projects";
+import { site, team, waHref, igHref } from "../site";
 
-const intro = [["Restaurants", "/restaurants/"], ["Academies and schools", "/work/?system=academy"], ["Real estate", "/work/?system=real-estate"], ["Invoicing and stock", "/work/?system=invoicing"], ["Madrassa management", "/work/?system=madrassa"]];
-const services = [
-  ["01", "var(--mint)", "Restaurant ordering", "An ordering workflow from the customer's action to the staff screen, with your menu imported, your branding applied and your team trained.", "/restaurants/"],
-  ["02", "var(--blue)", "Academy management", "Student registration and fee recording, set up with your existing student list imported, so records stop living in notebooks.", "/work/?system=academy"],
-  ["03", "var(--ink)", "Real estate operations", "Listings, enquiries and inventory in one place, scoped around the workflow your team actually uses.", "/work/?system=real-estate"],
-];
-const steps = [
-  ["Scope", "We agree one workflow, your branch count and what you provide. It is written down before any work starts."],
-  ["Configure", "We import your menu or student list, apply your branding and test the workflow on a staging copy."],
-  ["Train and check", "Your staff are trained on real tasks, then you test against an acceptance checklist we agreed in step one."],
-  ["Launch and support", "You go live, and we stay in touch with regular check-ins after launch and support for issues within the agreed scope."],
-];
-const featured = projects.slice(0, 2);
+const P = Object.fromEntries(featuredProjects.map((p) => [p.slug, p]));
+const num = (n: number) => String(n).padStart(2, "0");
+
+const coverMeta: Record<string, { base: string; max: number }> = {
+  theplotsale: { base: "theplotsale", max: 1915 },
+  "vibe-living-dxb": { base: "vibe-dxb", max: 1918 },
+  "edwardian-academy-erp": { base: "edwardian", max: 1918 },
+  "bun-restaurant-pos": { base: "bun", max: 1908 },
+  "7dot-commerce": { base: "sevendot", max: 1916 },
+  "sufi-glass-erp": { base: "sufi-glass", max: 1891 },
+  "caveclan-studio": { base: "caveclan", max: 1918 },
+};
+const srcsetOf = (base: string, max: number) =>
+  [640, 1280, max].map((w) => `/work/${base}-${w}.webp ${w}w`).join(", ");
+const sizes = "(min-width:960px) 60vw, 100vw";
+
+const range = [
+  ["01", "Engineering", "Full-stack product engineering: architecture, APIs, databases, deployment and the operational discipline to keep them running.", "Active"],
+  ["02", "Product", "Scoping, interface design and delivery ownership from first workflow map to production release.", "Active"],
+  ["03", "Systems", "ERP, attendance, inventory and invoicing systems modelled on how the business actually operates.", "Active"],
+  ["04", "Commerce", "Storefronts, catalogues and ordering flows wired into real fulfilment and payment behaviour.", "Active"],
+  ["05", "Experiences", "Brand sites and interactive web experiences with controlled, purposeful motion.", "Active"],
+] as const;
+
+const matrix = [
+  ["Web products", "Marketing sites, brand platforms, interactive experiences", [1, 1, 1]],
+  ["Business systems", "ERP, attendance, inventory, invoicing and operations", [1, 1, 1]],
+  ["Integrations", "Barcode hardware, WhatsApp, payments, third-party APIs", [0, 1, 1]],
+  ["Commerce", "Catalogues, ordering, fulfilment and stock behaviour", [1, 1, 1]],
+  ["Delivery & ops", "VPS deployment, monitoring, iteration after launch", [0, 1, 1]],
+] as const;
+
+const thinkFlow = ["Business problem", "Workflow", "System model", "Interface", "Production"];
+const edwFlow = ["Scan", "Validate", "Attendance", "Database", "Report"];
+const bunFlow = ["Customer", "Order", "Kitchen", "Delivery"];
 ---
-<Base title="Software that fits your business" rawTitle="Codefolk | Software that fits your business" description="Practical software, setup and training for local businesses in Peshawar and remote. Restaurant ordering, academy management and real estate operations.">
-  <section class="hero home">
-    <Blobs />
-    <Nav />
-    <div class="hero-body">
-      <Heading as="h1" l1="Software that" l2="fits your business" class="rise home-h1" indent="14%" />
-    </div>
-    <div class="hero-foot fadein">
+<Base
+  title="We build what businesses wish existed"
+  rawTitle="Codefolk | We build what businesses wish existed"
+  description="Codefolk designs and engineers serious digital products, business systems and web experiences for companies that have outgrown ordinary software."
+  form={false}
+>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <marker id="cf-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0 L8,4 L0,8" fill="none" stroke="rgba(234,244,242,.4)" stroke-width="1" />
+      </marker>
+    </defs>
+  </svg>
+
+  <div class="lab">
+    <div class="gridlines" aria-hidden="true"></div>
+    <div data-hero="nav"><Nav /></div>
+
+    <!-- SCENE 01 — system initialization -->
+    <section class="hz">
+      <video class="hz-reel" src="/heroQualityVideo.mp4" poster="/heroQualityVideo-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
       <div>
-        <p class="proof"><span class="dot" aria-hidden="true"></span><span><Txt s="[X] live systems running for real customers" /></span></p>
-        <div class="pills"><span class="pill">Software</span><span class="pill">Setup</span><span class="pill">Training</span></div>
-      </div>
-      <div class="hero-cta">
-        <p class="sub">We help business owners manage everyday work with practical software, setup and training.</p>
-        <div class="row">
-          <a class="btn" href="/contact/">Request a demo <span aria-hidden="true">↗</span></a>
-          <a class="textlink" href="/work/"><u>See our work</u></a>
+        <div class="hz-eyebrow mono">
+          <span data-scramble>CODEFOLK / {site.year}</span><span data-scramble>SOFTWARE + DIGITAL PRODUCTS</span><span data-scramble>AVAILABLE WORLDWIDE</span>
+        </div>
+        <h1>
+          <span class="ln"><span data-hero="line">We build what</span></span>
+          <span class="ln"><span data-hero="line">businesses <em>wish</em></span></span>
+          <span class="ln"><span data-hero="line">existed<em>.</em></span></span>
+        </h1>
+        <p class="hz-sub" data-hero="support">
+          A small engineering studio designing and building the systems companies run on —
+          platforms, ERP, commerce and the interfaces between them.
+        </p>
+        <div class="hz-act" data-hero="cta">
+          <a class="btn" href="/contact/">Start a project <span aria-hidden="true">↗</span></a>
+          <a class="pw-link" href="#work">01 / Selected systems</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="sec">
-    <div class="intro reveal">
-      <p class="statement">Most small businesses do not need more software. They need one workflow that works, set up properly and taught to the people who use it every day.</p>
-      <div class="pills">{intro.map(([l, h]) => <a class="pill ag-link" href={h}>{l}</a>)}</div>
-    </div>
-    <div class="numbers reveal">
-      <div><div class="n"><Txt s="[X]" /></div><div class="l">live systems</div></div>
-      <div><div class="n"><Txt s="[X]" /></div><div class="l">businesses served</div></div>
-      <div><div class="n"><Txt s="[X]" /></div><div class="l">cities</div></div>
-    </div>
-  </section>
-
-  <section class="sec" id="services">
-    <Heading class="reveal" l1="What we" l2="set up for you" />
-    <div class="cards reveal">
-      {services.map(([n, c, t, d, h]) => (
-        <article class="card svc">
-          <div class="top"><span>{n}</span><i style={`background:${c}`}></i></div>
-          <div><h3>{t}</h3><p>{d}</p></div>
-          <a class="more ag-link" href={h}>Learn more <span aria-hidden="true">↗</span></a>
-        </article>
-      ))}
-    </div>
-    <p class="after-cards"><a class="btn outline" href="/work/">View all systems <span aria-hidden="true">↗</span></a></p>
-  </section>
-
-  {featured.length === 2 && (
-    <section class="panel" id="work">
-      <div class="glow g-blue anim" aria-hidden="true"></div>
-      <p class="eyebrow">Our work</p>
-      <Heading class="reveal" l1="Live systems," l2="not mockups" />
-      <div class="tiles reveal">{featured.map((p) => <ProjectCard project={p} variant="dark" showSystem={false} />)}</div>
-    </section>
-  )}
-
-  <section class="sec">
-    <Heading class="reveal" l1="How setup" l2="actually works" />
-    <p class="sub" style="color:var(--muted);margin-top:calc(-1 * clamp(20px,3vw,32px))">Four steps, each with something you can check before we move on.</p>
-    <p class="days"><Txt s="[X] days from kickoff" /></p>
-    <ol class="steps reveal">
-      {steps.map(([t, d], i) => <li><div class="n">0{i + 1}</div><h3>{t}</h3><p>{d}</p></li>)}
-    </ol>
-  </section>
-
-  <section class="panel" id="packages">
-    <div class="glow g-mint anim" aria-hidden="true"></div>
-    <p class="eyebrow">Packages</p>
-    <Heading class="reveal" l1="A fixed scope," l2="in writing" />
-    <p class="sub" style="margin-top:24px">Anything outside the package is estimated separately and approved by you before we start.</p>
-    <div class="packs reveal">
-      <article class="pack feat">
-        <div class="pack-top"><h3>Restaurant starter</h3><span class="badge">Start here</span></div>
-        <ul>
-          <li>One branch, one ordering workflow</li><li>Your menu imported from our template</li><li>One branding pass</li>
-          <li>Staff training sessions</li><li>Acceptance checklist and launch support</li>
-        </ul>
-        <a class="btn" href="/contact/">Get a quote <span aria-hidden="true">↗</span></a>
-        <p class="note">Not included unless quoted: hardware, printer and payment gateway integration, delivery platforms, offline mode and extra branches.</p>
-      </article>
-      <div class="pack-side">
-        <article class="pack"><h3>Academy starter</h3><p>Student import, registration and fee recording. Extra features are estimated separately.</p><a class="qlink" href="/contact/"><u>Get a quote</u></a></article>
-        <article class="pack"><h3>Real estate</h3><p>Listings, enquiries and inventory. We set up the software. We do not promise sales or investment returns.</p><a class="qlink" href="/contact/"><u>Get a quote</u></a></article>
+      <div class="hz-meta mono">
+        <span data-scramble>{site.location}</span>
+        <span data-scramble>07 systems in production</span>
+        <span data-scramble>34.0151° N / 71.5249° E</span>
+        <span data-scramble>Scroll to inspect ↓</span>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- SCENE 02 — operating range -->
+    <section class="range">
+      <div class="hd">
+        <h2>Operating range</h2>
+        <span class="mono">DISCIPLINES / 05</span>
+      </div>
+      {range.map(([ix, tt, ds, st]) => (
+        <div class="rrow">
+          <span class="ix">{ix}</span>
+          <span class="tt">{tt}</span>
+          <span class="ds">{ds}</span>
+          <span class="st"><i></i>{st}</span>
+        </div>
+      ))}
+    </section>
+
+    <!-- SCENE 03 — selected systems -->
+    <section class="syswork" id="work">
+      <div class="hd">
+        <h2>Selected systems</h2>
+        <span class="mono">SHIPPED + RUNNING / 07</span>
+      </div>
+
+      <!-- 01 ThePlotSale : public platform + operations system -->
+      <article class="pw p1" data-mode="public">
+        <header class="pw-hd">
+          <span class="ix">{num(P.theplotsale.order)}</span>
+          <h3 class="nm"><a href="/work/theplotsale/">{P.theplotsale.shortTitle}</a></h3>
+          <span class="ct">REAL ESTATE PLATFORM / CMS + OPERATIONS / {P.theplotsale.year}</span>
+        </header>
+        <div class="pw-grid">
+          <a class="frame main" href="/work/theplotsale/" data-cursor="VIEW">
+            <span class="tag">PUBLIC EXPERIENCE</span>
+            <img src={P.theplotsale.cover.src} srcset={srcsetOf("theplotsale", 1915)} sizes={sizes} alt={P.theplotsale.cover.alt} loading="eager" decoding="async" />
+          </a>
+          <a class="frame ops" href="/work/theplotsale/" aria-label="Open ThePlotSale operations system">
+            <span class="tag">OPERATIONS SYSTEM</span>
+            <img src="/work/theplotsale-erp.png" srcset="/work/theplotsale-erp-640.webp 640w, /work/theplotsale-erp-1200.webp 1200w" sizes="(min-width:960px) 40vw, 100vw" alt="ThePlotSale admin and CMS operations interface" loading="lazy" decoding="async" />
+          </a>
+          <div class="side">
+            <div class="sw" role="group" aria-label="ThePlotSale view">
+              <button type="button" data-mode="public" aria-pressed="true">Public</button>
+              <button type="button" data-mode="ops" aria-pressed="false">Operations</button>
+            </div>
+            <div class="kv">
+              <span class="k">Stack</span><span class="v">{P.theplotsale.technologies.slice(0, 3).join(" / ")}</span>
+              <span class="k">Scope</span><span class="v">Web platform / admin system</span>
+              <span class="k">State</span><span class="v">Live</span>
+            </div>
+            <p class="pw-note">One codebase, two surfaces: the public property platform and the operations system the team runs it from.</p>
+            <a class="pw-link" href="/work/theplotsale/">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 Vibe Living : cinematic framed crop -->
+      <article class="pw p2">
+        <header class="pw-hd">
+          <span class="ix">{num(P["vibe-living-dxb"].order)}</span>
+          <h3 class="nm"><a href="/work/vibe-living-dxb/">{P["vibe-living-dxb"].shortTitle}</a></h3>
+          <span class="ct">REAL ESTATE EXPERIENCE / DUBAI / {P["vibe-living-dxb"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <a class="frame wide" href="/work/vibe-living-dxb/" data-cursor="VIEW">
+            <span class="tag">BRAND EXPERIENCE</span>
+            <img src={P["vibe-living-dxb"].cover.src} srcset={srcsetOf("vibe-dxb", 1918)} sizes="(min-width:960px) 92vw, 100vw" alt={P["vibe-living-dxb"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+          <div class="under mono">
+            <span>PROPERTY LISTINGS</span><span>AREA GUIDES</span><span>ENQUIRY FLOW</span>
+            <span>{P["vibe-living-dxb"].technologies.slice(0, 2).join(" / ")}</span>
+            <a class="pw-link" href="/work/vibe-living-dxb/">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 Edwardian : system map + proof -->
+      <article class="pw p3">
+        <header class="pw-hd">
+          <span class="ix">{num(P["edwardian-academy-erp"].order)}</span>
+          <h3 class="nm"><a href="/work/edwardian-academy-erp/">{P["edwardian-academy-erp"].shortTitle}</a></h3>
+          <span class="ct">ACADEMY ERP / BARCODE ATTENDANCE / {P["edwardian-academy-erp"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <div class="diag frame" style="background:transparent;border-style:dashed">
+            <svg viewBox="0 0 560 150" data-nodes>
+              {edwFlow.map((label, i) => (
+                <g>
+                  <rect class={i === 2 ? "bx bx-hi" : "bx"} x={i * 112 + 4} y="52" width="96" height="40" rx="4" />
+                  <text class={i === 2 ? "hi" : ""} x={i * 112 + 52} y="76" text-anchor="middle">{label.toUpperCase()}</text>
+                  {i < 4 && <line class="ar" data-draw x1={i * 112 + 100} y1="72" x2={i * 112 + 116} y2="72" />}
+                </g>
+              ))}
+            </svg>
+          </div>
+          <a class="frame proof" href="/work/edwardian-academy-erp/" data-cursor="VIEW">
+            <span class="tag">PRODUCT EVIDENCE</span>
+            <img src={P["edwardian-academy-erp"].cover.src} srcset={srcsetOf("edwardian", 1918)} sizes="(min-width:960px) 40vw, 100vw" alt={P["edwardian-academy-erp"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+          <div class="facts side">
+            <div class="kv">
+              <span class="k">Input</span><span class="v">Barcode scan at gate</span>
+              <span class="k">Check-in</span><span class="v">Sub-second validation</span>
+              <span class="k">Deploy</span><span class="v">VPS / production</span>
+              <span class="k">Stack</span><span class="v">{P["edwardian-academy-erp"].technologies.slice(0, 3).join(" / ")}</span>
+            </div>
+            <p class="pw-note">Attendance stops being a register and becomes an event stream the whole ERP can read.</p>
+            <a class="pw-link" href="/work/edwardian-academy-erp/">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 Bun : order flow + composed media -->
+      <article class="pw p4">
+        <header class="pw-hd">
+          <span class="ix">{num(P["bun-restaurant-pos"].order)}</span>
+          <h3 class="nm"><a href="/work/bun-restaurant-pos/">{P["bun-restaurant-pos"].shortTitle}</a></h3>
+          <span class="ct">RESTAURANT POS / ORDER PIPELINE / {P["bun-restaurant-pos"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <div class="flow">
+            <svg viewBox="0 0 760 90" data-nodes>
+              {bunFlow.map((label, i) => (
+                <g>
+                  <rect class={i === 1 ? "bx bx-hi" : "bx"} x={i * 190 + 6} y="25" width="120" height="40" rx="4" />
+                  <text class={i === 1 ? "hi" : ""} x={i * 190 + 66} y="49" text-anchor="middle">{label.toUpperCase()}</text>
+                  {i < 3 && <line class="ar" data-draw x1={i * 190 + 126} y1="45" x2={i * 190 + 182} y2="45" />}
+                </g>
+              ))}
+            </svg>
+          </div>
+          <div class="lead side">
+            <div class="kv">
+              <span class="k">Surface</span><span class="v">Customer + staff</span>
+              <span class="k">Stack</span><span class="v">{P["bun-restaurant-pos"].technologies.slice(0, 3).join(" / ")}</span>
+            </div>
+            <p class="pw-note">An order is a state machine: placed, fired to kitchen, prepared, delivered. The interface just makes each state obvious.</p>
+            <a class="pw-link" href="/work/bun-restaurant-pos/">Inside the build ↗</a>
+          </div>
+          <a class="frame media" href="/work/bun-restaurant-pos/" data-cursor="VIEW">
+            <span class="tag">SERVICE EXPERIENCE</span>
+            <img src={P["bun-restaurant-pos"].cover.src} srcset={srcsetOf("bun", 1908)} sizes="(min-width:960px) 70vw, 100vw" alt={P["bun-restaurant-pos"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+        </div>
+      </article>
+
+      <!-- 05 7dot : quiet editorial -->
+      <article class="pw p5">
+        <header class="pw-hd">
+          <span class="ix">{num(P["7dot-commerce"].order)}</span>
+          <h3 class="nm"><a href="/work/7dot-commerce/">{P["7dot-commerce"].shortTitle}</a></h3>
+          <span class="ct">COMMERCE / CATALOGUE + CHECKOUT / {P["7dot-commerce"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <a class="frame media" href="/work/7dot-commerce/" data-cursor="VIEW">
+            <img src={P["7dot-commerce"].cover.src} srcset={srcsetOf("sevendot", 1916)} sizes="(min-width:960px) 42vw, 100vw" alt={P["7dot-commerce"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+          <div class="txt">
+            <h3>Commerce without theatre.</h3>
+            <p class="pw-note">A catalogue, a checkout and stock behaviour that stays truthful — composed quietly so the products carry the page.</p>
+            <div class="kv" style="margin-top:14px">
+              <span class="k">Stack</span><span class="v">{P["7dot-commerce"].technologies.slice(0, 3).join(" / ")}</span>
+            </div>
+            <a class="pw-link" href="/work/7dot-commerce/" style="display:inline-block;margin-top:14px">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 Sufi Glass : enterprise evidence -->
+      <article class="pw p6">
+        <header class="pw-hd">
+          <span class="ix">{num(P["sufi-glass-erp"].order)}</span>
+          <h3 class="nm"><a href="/work/sufi-glass-erp/">{P["sufi-glass-erp"].shortTitle}</a></h3>
+          <span class="ct">GLASS WORKS ERP / FINANCE + INVENTORY / {P["sufi-glass-erp"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <div class="labels" aria-hidden="true">
+            <span class="on">FINANCE</span><span>INVENTORY</span><span>QUOTATION</span><span>RECEIVABLES</span>
+          </div>
+          <a class="frame dash" href="/work/sufi-glass-erp/" data-cursor="VIEW">
+            <span class="tag">LIVE DASHBOARD</span>
+            <img src={P["sufi-glass-erp"].cover.src} srcset={srcsetOf("sufi-glass", 1891)} sizes="(min-width:960px) 70vw, 100vw" alt={P["sufi-glass-erp"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+          <div class="side" style="grid-column:1/13">
+            <p class="pw-note">Quotations, stock movement and receivables in one operational picture — the dashboard is the product, shown as-is.</p>
+            <a class="pw-link" href="/work/sufi-glass-erp/">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 CaveClan : experimental closer -->
+      <article class="pw p7">
+        <header class="pw-hd">
+          <span class="ix">{num(P["caveclan-studio"].order)}</span>
+          <h3 class="nm"><a href="/work/caveclan-studio/">{P["caveclan-studio"].shortTitle}</a></h3>
+          <span class="ct">EXPERIMENTAL / BRAND + MOTION / {P["caveclan-studio"].year}</span>
+        </header>
+        <div class="pw-grid">
+          <a class="frame wide" href="/work/caveclan-studio/" data-cursor="VIEW">
+            <span class="tag">EXPERIMENT</span>
+            <img src={P["caveclan-studio"].cover.src} srcset={srcsetOf("caveclan", 1918)} sizes="(min-width:960px) 92vw, 100vw" alt={P["caveclan-studio"].cover.alt} loading="lazy" decoding="async" />
+          </a>
+          <div class="under mono">
+            <span>MOTION STUDY</span><span>INTERACTIVE WEB</span>
+            <a class="pw-link" href="/work/caveclan-studio/">Inside the build ↗</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SCENE 04 — how we think -->
+    <section class="think">
+      <div>
+        <span class="mono">METHOD / SYSTEM FLOW</span>
+        <h2>We model the business before we model the software.</h2>
+        <p>Every engagement starts as a diagram: the problem, the workflow people actually follow, the system that can carry it, then the interface and the production run. Nothing gets built before the model is right.</p>
+      </div>
+      <div class="vert flow frame" style="background:transparent;border-style:dashed">
+        <svg viewBox="0 0 300 340" data-nodes>
+          {thinkFlow.map((label, i) => (
+            <g>
+              <rect class={i === 2 ? "bx bx-hi" : "bx"} x="80" y={i * 68 + 8} width="140" height="38" rx="4" />
+              <text class={i === 2 ? "hi" : ""} x="150" y={i * 68 + 31} text-anchor="middle">{label.toUpperCase()}</text>
+              {i < 4 && <line class="ar" data-draw x1="150" y1={i * 68 + 46} x2="150" y2={i * 68 + 76} />}
+            </g>
+          ))}
+        </svg>
+      </div>
+    </section>
+
+    <!-- SCENE 05 — capability matrix -->
+    <section class="matrix" id="capabilities">
+      <div class="hd">
+        <h2>Capability matrix</h2>
+        <span class="mono">DESIGN / BUILD / OPERATE</span>
+      </div>
+      <div class="mrow head">
+        <span class="mono">DISCIPLINE</span><span class="mono">TYPICAL SCOPE</span>
+        <span>DESIGN</span><span>BUILD</span><span>OPERATE</span>
+      </div>
+      {matrix.map(([nm, ds, mk]) => (
+        <div class="mrow">
+          <span class="nm">{nm}</span>
+          <span class="ds">{ds}</span>
+          <span class:list={["mk", !mk[0] && "o"]}>{mk[0] ? "●" : "○"}</span>
+          <span class:list={["mk", !mk[1] && "o"]}>{mk[1] ? "●" : "○"}</span>
+          <span class:list={["mk", !mk[2] && "o"]}>{mk[2] ? "●" : "○"}</span>
+        </div>
+      ))}
+    </section>
+
+    <!-- SCENE 06 — the people -->
+    <section class="people">
+      <div class="hd">
+        <h2>The people responsible</h2>
+        <span class="mono">03 / OWNERSHIP</span>
+      </div>
+      <div class="pgrid">
+        {team.map((m, i) => (
+          <div class={`pm pm-${i + 1}`}>
+            <div class="ph">
+              <img src={m.photo.src} srcset={m.photo.srcset} width={m.photo.width} height={m.photo.height} alt={m.name} loading="lazy" decoding="async" />
+            </div>
+            <span class="ix">{num(i + 1)} / {m.role.split(" ")[0].toUpperCase()}</span>
+            <p class="nm">{m.name}</p>
+            <span class="rl">{m.role}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SCENE 07 — project input -->
+    <section class="close" id="contact-scene">
+      <div>
+        <span class="mono lbl">PROJECT INPUT</span>
+        <h2>What are you trying to build?</h2>
+        <a class="btn" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="rows">
+        <div><span class="k">WhatsApp</span><span class="v"><a href={waHref}>{site.whatsappDisplay}</a></span></div>
+        <div><span class="k">Location</span><span class="v">{site.location}</span></div>
+        <div><span class="k">Response</span><span class="v">Within one working day</span></div>
+        <div><span class="k">Instagram</span><span class="v"><a href={igHref}>@codefolk</a></span></div>
+      </div>
+      <div class="resolve" aria-hidden="true">
+        <svg viewBox="0 0 800 72" data-nodes>
+          <line class="lk" data-draw x1="120" y1="36" x2="360" y2="36" />
+          <line class="lk" data-draw x1="440" y1="36" x2="680" y2="36" />
+          <circle class="nd" cx="120" cy="36" r="10" />
+          <circle class="nd nd-hub" cx="400" cy="36" r="16" />
+          <circle class="nd" cx="680" cy="36" r="10" />
+        </svg>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const p1 = document.querySelector(".p1") as HTMLElement | null;
+    p1?.querySelectorAll<HTMLButtonElement>(".sw button").forEach((b) => {
+      b.addEventListener("click", () => {
+        const mode = b.dataset.mode!;
+        p1.dataset.mode = mode;
+        p1.querySelectorAll<HTMLButtonElement>(".sw button").forEach((x) =>
+          x.setAttribute("aria-pressed", String(x === b)));
+      });
+    });
+
+    const reel = document.querySelector<HTMLVideoElement>(".hz-reel");
+    if (reel) {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        reel.pause();
+        reel.removeAttribute("autoplay");
+      } else {
+        new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) reel.play().catch(() => {});
+          else reel.pause();
+        }, { threshold: 0.05 }).observe(reel);
+      }
+    }
+
+    const scrEls = document.querySelectorAll<HTMLElement>("[data-scramble]");
+    if (scrEls.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const CH = "01<>/{}[]#$%&*+=";
+      const run = (el: HTMLElement, d: number) => {
+        const fin = el.dataset.text || el.textContent || "";
+        el.dataset.text = fin;
+        let i = 0;
+        setTimeout(() => {
+          const iv = setInterval(() => {
+            i += 0.6;
+            el.textContent = fin.split("").map((c, j) => (c === " " ? " " : j < i ? c : CH[(Math.random() * CH.length) | 0])).join("");
+            if (i >= fin.length) { clearInterval(iv); el.textContent = fin; }
+          }, 28);
+        }, d);
+      };
+      const start = () => scrEls.forEach((el, k) => run(el, k * 80));
+      if (document.documentElement.classList.contains("is-ready")) start();
+      else document.addEventListener("cf:loader:leave", start, { once: true });
+    }
+  </script>
 </Base>

@@ -1,260 +1,250 @@
 [
   {
-    "slug": "restaurant-one",
-    "name": "[Project name]",
-    "client": null,
-    "system": "restaurant",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
-    "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
-    ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
-  },
-  {
-    "slug": "academy-one",
-    "name": "[Project name]",
-    "client": null,
-    "system": "academy",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
-    "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
-    ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
-  },
-  {
-    "slug": "real-estate-one",
-    "name": "[Project name]",
-    "client": null,
+    "slug": "theplotsale",
+    "name": "ThePlotSale",
+    "shortTitle": "ThePlotSale",
+    "client": "ThePlotSale",
+    "category": "Real-estate platform + operations system",
     "system": "real-estate",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
+    "systems": ["real-estate"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 1,
+    "summary": "A bespoke full-stack CMS and digital platform for high-end land and property operations, replacing off-the-shelf real-estate software with a purpose-built parcel system.",
+    "problem": "Generic real-estate templates force land listings into bedroom/bathroom schemas that cannot express plot zoning, dimensional frontage, utilities or topography.",
+    "solution": "A bespoke parcel schema with dimensional attributes and zoning categories, dynamic listing modules, a custom admin CMS and a cinematic public interface.",
+    "built": "Dynamic property listing modules, a custom backend management system and a premium cinematic UI with scalable architecture for high-resolution international listings.",
+    "outcome": "A purpose-built land listing platform that presents commercial parcel parameters cleanly and helps brokers convert online interest into serious inquiries.",
+    "technologies": ["Next.js", "React", "MongoDB", "Express", "Node.js", "Tailwind CSS", "Framer Motion", "GSAP"],
+    "services": ["Custom CMS", "Property listing modules", "Backend management", "Responsive property presentation"],
+    "cover": { "src": "/work/theplotsale.png", "alt": "ThePlotSale luxury real-estate platform homepage" },
+    "gallery": [{ "src": "/work/theplotsale-erp.png", "alt": "ThePlotSale admin ERP dashboard" }],
+    "video": null,
     "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
+      { "src": "/work/theplotsale.png", "alt": "ThePlotSale public property platform", "sample": false },
+      { "src": "/work/theplotsale-erp.png", "alt": "ThePlotSale admin ERP", "sample": false }
     ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
+    "results": [],
+    "quote": null,
+    "liveUrl": "https://www.theplotsale.com/",
+    "repositoryUrl": null,
+    "theme": { "accent": "#D4AF37" },
+    "media": { "status": "good" },
+    "caseStudyContent": {
+      "role": "Full-stack product developer: dynamic listing modules, custom CMS backend, responsive presentation and search architecture.",
+      "status": "Production build",
+      "highlights": ["Bespoke parcel dimensional schema", "Custom admin CMS", "Dynamic query filters", "Companion admin ERP"]
+    }
   },
   {
-    "slug": "invoicing-one",
-    "name": "[Project name]",
-    "client": null,
-    "system": "invoicing",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
-    "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
-    ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
+    "slug": "vibe-living-dxb",
+    "name": "Vibe Living DXB",
+    "shortTitle": "Vibe Living",
+    "client": "Vibe Living DXB",
+    "category": "Luxury real-estate platform + custom CMS",
+    "system": "real-estate",
+    "systems": ["real-estate"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 2,
+    "summary": "A fully dynamic, high-end real-estate platform for a premier Dubai property firm where every section — areas, listings, agents and homepage — is CMS-managed.",
+    "problem": "A boutique Dubai luxury operator needed an editorial web platform matching their brand while letting non-technical marketing staff update listings, pricing and area guides without code.",
+    "solution": "A custom CMS-driven architecture separating managed content from presentation, with advanced filtering and a sophisticated ultra-luxury UI.",
+    "built": "CMS-driven listings, areas, agent profiles and homepage content with elegant property discovery, advanced filtering and responsive brand experience.",
+    "outcome": "A publicly accessible real-estate website backed by a custom content management architecture; the client team publishes new properties and guides without technical assistance.",
+    "technologies": ["Next.js", "React", "Node.js", "MongoDB", "Tailwind CSS", "GSAP", "Framer Motion"],
+    "services": ["Property discovery & filtering", "Editable listings and areas", "Agent profiles", "Responsive brand experience"],
+    "cover": { "src": "/work/vibe-dxb.png", "alt": "Vibe Living DXB luxury Dubai real-estate homepage" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/vibe-dxb.png", "alt": "Vibe Living DXB property platform", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": "https://www.vibelivingdxb.com/",
+    "repositoryUrl": null,
+    "theme": { "accent": "#B8860B" },
+    "media": { "status": "good" },
+    "caseStudyContent": {
+      "role": "Lead full-stack engineer: architectural layout, dynamic filtering, custom CMS schema, responsive design and SEO optimization.",
+      "status": "Live client platform",
+      "highlights": ["Every section CMS-editable", "Neighborhood context pages", "Agent-routed inquiries", "Next.js image optimization"]
+    }
   },
   {
-    "slug": "madrassa-one",
-    "name": "[Project name]",
-    "client": null,
-    "system": "madrassa",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
-    "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
-    ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
+    "slug": "edwardian-academy-erp",
+    "name": "Edwardian Academy ERP",
+    "shortTitle": "Edwardian",
+    "client": "Edwardian Academy",
+    "category": "Education ERP + barcode attendance",
+    "system": "academy",
+    "systems": ["academy"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 3,
+    "summary": "A centralized MERN-stack Educational Resource Planning system with physical barcode-scanner attendance, deployed to a managed Linux VPS.",
+    "problem": "Hundreds of daily students checked in on paper registers, causing front-desk congestion, attendance tampering and days of manual monthly reporting.",
+    "solution": "A MERN ERP with a USB/HID barcode scanner event pipeline for sub-second attendance, deployed on a Hostinger VPS with Nginx reverse proxy and PM2.",
+    "built": "Barcode attendance integration, administrative workflows, database hosting and full-stack VPS deployment from scratch.",
+    "outcome": "Eliminated the morning front-desk bottleneck with sub-second check-in and tamper-proof digital records, saving dozens of hours of monthly admin reporting.",
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "Hostinger VPS", "Barcode APIs"],
+    "services": ["Barcode attendance", "Administrative workflows", "Database hosting", "VPS deployment"],
+    "cover": { "src": "/work/edwardian.png", "alt": "Edwardian Academy ERP owner dashboard" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/edwardian.png", "alt": "Edwardian Academy ERP dashboard", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": null,
+    "repositoryUrl": null,
+    "theme": { "accent": "#3B82F6" },
+    "media": { "status": "needs-replacement", "note": "Source capture includes browser chrome and OS taskbar; presented as a safe center crop in a frame until a clean capture is supplied." },
+    "caseStudyContent": {
+      "role": "Full-stack product engineer: MERN architecture, barcode scanner event pipeline, Hostinger VPS deployment and Linux server routing.",
+      "status": "VPS deployed production system",
+      "highlights": ["Sub-second HID barcode check-in", "Duplicate-scan safeguard", "Automated attendance reports", "Nginx + PM2 VPS hosting"]
+    }
   },
   {
-    "slug": "restaurant-two",
-    "name": "[Project name]",
-    "client": null,
+    "slug": "bun-restaurant-pos",
+    "name": "Bun",
+    "shortTitle": "Bun",
+    "client": "Bun",
+    "category": "Restaurant ordering + staff POS",
     "system": "restaurant",
-    "year": "[Year]",
-    "permission": "pending",
-    "outcome": "[One-line outcome]",
-    "problem": "[What the business was struggling with before. Use their words if you have permission.]",
-    "built": "[The workflow we set up, what was configured, and how staff were trained.]",
-    "screenshots": [
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      },
-      {
-        "src": "",
-        "alt": "",
-        "sample": false
-      }
-    ],
-    "results": [
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      },
-      {
-        "value": "[X]",
-        "label": "[What it measures]"
-      }
-    ],
-    "quote": null
+    "systems": ["restaurant"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 4,
+    "summary": "A cinematic full-stack restaurant ordering platform and POS bridging customer digital ordering with staff-facing kitchen display and cashier operations.",
+    "problem": "Customer ordering detached from kitchen preparation queues causes communication lag, sold-out errors and slow table turnover during peak hours.",
+    "solution": "A dual-surface architecture: an expressive customer ordering UI connected to a live staff POS with kitchen order queues and role-based access.",
+    "built": "Category filtering, quick-add modifier modal with upsells, slide-in cart with itemized receipts, live kitchen order queue, menu CRUD and RBAC admin.",
+    "outcome": "A complete ordering-to-fulfillment pipeline that eliminates order translation errors between dining room and kitchen.",
+    "technologies": ["Next.js", "React", "MongoDB", "GSAP", "RBAC & POS", "Tailwind CSS"],
+    "services": ["Live order queues", "Role-based access", "Menu management", "Cart & itemized receipts"],
+    "cover": { "src": "/work/bun.png", "alt": "Bun restaurant ordering platform menu" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/bun.png", "alt": "Bun ordering platform", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": "https://bun-flavor-narrative.vercel.app/",
+    "repositoryUrl": null,
+    "theme": { "accent": "#C1432A" },
+    "media": { "status": "good" },
+    "caseStudyContent": {
+      "role": "Full-stack product engineer: dual-surface architecture, live state management, receipt generator and deployment.",
+      "status": "Deployed system, public demo",
+      "highlights": ["Customer + staff POS surfaces", "Optimistic live order state", "Kitchen status transitions", "Itemized receipt generator"]
+    }
+  },
+  {
+    "slug": "7dot-commerce",
+    "name": "7dot",
+    "shortTitle": "7dot",
+    "client": "7dot",
+    "category": "Quiet-luxury cosmetics commerce",
+    "system": "commerce",
+    "systems": ["commerce"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 5,
+    "summary": "A quiet-luxury cosmetics e-commerce platform pairing interactive shade discovery with an administrative inventory and fulfillment dashboard.",
+    "problem": "Online cosmetic retail suffers high return rates when customers cannot gauge true shades and finishes digitally.",
+    "solution": "An interactive shade-matching picker with high-resolution texture swatches and undertone guidance, plus clean back-office fulfillment tools.",
+    "built": "Shade-matching quizzes, live lip-tint swatches, smooth scrolling, slide-in cart drawer and a multi-role admin dashboard for inventory and orders.",
+    "outcome": "An elevated beauty shopping experience pairing editorial aesthetics with rigorous inventory and order-fulfillment controls.",
+    "technologies": ["Next.js", "React", "MongoDB", "Mongoose", "GSAP", "Tailwind CSS"],
+    "services": ["Shade discovery", "Cart workflows", "Inventory administration", "Order fulfillment"],
+    "cover": { "src": "/work/sevendot.png", "alt": "7dot cosmetics storefront hero" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/sevendot.png", "alt": "7dot storefront", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": "https://project-seven-three.vercel.app/",
+    "repositoryUrl": null,
+    "theme": { "accent": "#F8F4E9" },
+    "media": { "status": "good" },
+    "caseStudyContent": {
+      "role": "Full-stack product engineer: shade-matching quiz, interactive swatch UI, cart drawer and administrative fulfillment dashboard.",
+      "status": "Deployed system, public demo",
+      "highlights": ["Interactive shade picker", "Slide-out cart drawer", "Multi-role fulfillment dashboard", "Low-stock indicators"]
+    }
+  },
+  {
+    "slug": "sufi-glass-erp",
+    "name": "Sufi Glass",
+    "shortTitle": "Sufi Glass",
+    "client": "Sufi Glass",
+    "category": "Financial & stock administration ERP",
+    "system": "invoicing",
+    "systems": ["invoicing"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 6,
+    "summary": "A centralized financial ERP and stock administration system for wholesale glass distribution, connected to live production data.",
+    "problem": "Orders, cutting specifications and credit collections lived across paper ledgers and manual calculations, causing quote errors and slow invoicing.",
+    "solution": "A custom dimensional rate engine and a native transactional ledger in MongoDB, giving financial screens one common data foundation.",
+    "built": "Sales invoices, quotations, receipt and expense tracking, glass master rate catalogs, 7-day collection trends and automated customer directories.",
+    "outcome": "Replaced fragmented manual ledgers with a unified operational ERP; quotes and invoices calculate in seconds and inventory syncs on dispatch.",
+    "technologies": ["Next.js", "React", "MongoDB", "Mongoose", "Recharts", "Tailwind CSS"],
+    "services": ["Invoices & quotations", "Receipts & expenses", "Rate catalogs", "Collection reporting"],
+    "cover": { "src": "/work/sufi-glass.png", "alt": "Sufi Glass financial dashboard with live collection data" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/sufi-glass.png", "alt": "Sufi Glass financial dashboard", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": null,
+    "repositoryUrl": null,
+    "theme": { "accent": "#0F172A" },
+    "media": { "status": "art-directed", "note": "Real operational dashboard presented in a console frame; the live data is the proof." },
+    "caseStudyContent": {
+      "role": "Full-stack product engineer: database architecture, business logic, financial calculators, admin UI and deployment.",
+      "status": "Production system, private internal",
+      "highlights": ["Dimensional glass rate engine", "Quote-to-invoice conversion", "Live collection trend charts", "Immutable receipt ledger"]
+    }
+  },
+  {
+    "slug": "caveclan-studio",
+    "name": "CaveClan",
+    "shortTitle": "CaveClan",
+    "client": "CaveClan Studios",
+    "category": "Immersive brand & motion experience",
+    "system": "brand-site",
+    "systems": ["brand-site"],
+    "year": "2026",
+    "permission": "cleared",
+    "featured": true,
+    "order": 7,
+    "summary": "A visually rich, on-scroll immersive website for a premium luxury studio art brand that turns scrolling into an artistic narrative.",
+    "problem": "A high-end studio art brand needed a digital presence as considered and cinematic as its physical productions.",
+    "solution": "A bespoke scroll-triggered design system with GSAP-driven narrative sequencing and luxurious visual storytelling.",
+    "built": "Meticulously crafted scroll-triggered animations, luxurious visual storytelling and a bespoke design system for high-end brand presentation.",
+    "outcome": "An immersive brand experience that presents the studio's work as a continuous cinematic narrative.",
+    "technologies": ["Next.js", "React", "GSAP", "ScrollTrigger", "Tailwind CSS", "Framer Motion"],
+    "services": ["Scroll narrative", "Art direction", "Motion design", "Bespoke design system"],
+    "cover": { "src": "/work/caveclan.png", "alt": "CaveClan studio immersive homepage" },
+    "gallery": [],
+    "video": null,
+    "screenshots": [{ "src": "/work/caveclan.png", "alt": "CaveClan immersive site", "sample": false }],
+    "results": [],
+    "quote": null,
+    "liveUrl": "https://canva-clan-masterpiece-eenv.vercel.app/",
+    "repositoryUrl": null,
+    "theme": { "accent": "#C9A96E" },
+    "media": { "status": "good" },
+    "caseStudyContent": {
+      "role": "Frontend architect and motion designer: scroll choreography, bespoke design system and cinematic presentation.",
+      "status": "Live client site",
+      "highlights": ["GSAP scroll narrative", "Cinematic type scale", "Bespoke brand system"]
+    }
   }
 ]

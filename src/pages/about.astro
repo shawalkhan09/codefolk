@@ -15,12 +15,22 @@ const links = (m: (typeof team)[number]) => ([["Website", m.website], ["GitHub",
 ---
 <Base title="About" description="A small team that builds the software, sets it up and teaches your staff to use it." current="/about/" l1="Want to talk" l2="to the team?">
   <PageHero current="/about/" eyebrow="About" l1="Three people," l2="one workflow at a time" sub="A small team that builds the software, sets it up and teaches your staff to use it." />
-  <section class="sec">
-    <p class="about-intro reveal"><Txt s="[Two or three sentences on why you started and who you are: friends and engineers from Peshawar, building practical software for local businesses.]" /></p>
+  <section class="sec about-section">
+    <div class="about-intro-wrap reveal">
+      <p class="eyebrow">The studio / 01</p>
+      <p class="about-intro"><Txt s="Codefolk began in Peshawar with a simple belief: ambitious businesses deserve software that feels made for them, not forced around a template. We are friends, engineers and product thinkers who turn complicated operations into calm, dependable digital products that help teams move faster and sell with confidence." /></p>
+      <p class="about-signature">From first conversation to production, the people you meet are the people who build your system.</p>
+    </div>
+    <div class="about-proof reveal" aria-label="Codefolk at a glance">
+      <div><strong>07</strong><span>systems shipped</span></div>
+      <div><strong>04</strong><span>industries served</span></div>
+      <div><strong>01</strong><span>senior team from start to launch</span></div>
+    </div>
     <div class="cards people reveal">
       {team.map((m) => (
-        <article class="card">
+        <article class="card person-card">
           <Shot ratio="4/5" label="Photo placeholder" shot={m.photo ? { ...m.photo, alt: m.name } : null} sizes="(min-width:1024px) 30vw, (min-width:700px) 45vw, 90vw" />
+          <div class="person-meta"><span class="person-index">0{team.indexOf(m) + 1}</span><span class="person-rule"></span></div>
           <h2 class="pn"><Txt s={m.name} /></h2>
           <p class="role">{m.role}</p>
           <div class="pills">

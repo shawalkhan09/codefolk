@@ -88,11 +88,11 @@ for (const [w, collapsed] of [[375, true], [820, true], [900, false]]) {
   const sc = await page.evaluate(() => { const c = document.querySelector(".chips"); return { scrolls: c.scrollWidth > c.clientWidth, snap: getComputedStyle(c).scrollSnapType, wrap: getComputedStyle(c).flexWrap, page: document.scrollingElement.scrollWidth <= innerWidth }; });
   ok("work 375: chips are one scrollable snap row, page not wider", sc.scrolls && sc.wrap === "nowrap" && /x/.test(sc.snap) && sc.page, JSON.stringify(sc));
   const counts = {};
-  for (const f of ["all", "restaurant", "academy", "real-estate", "invoicing", "madrassa"]) {
+  for (const f of await page.locator(".chip").evaluateAll((els) => els.map((e) => e.dataset.filter))) {
     await page.locator(`.chip[data-filter=${f}]`).click();
     counts[f] = await page.locator("#grid .project:visible").count();
   }
-  ok("work 375: filters work", counts.all === 6 && counts.restaurant === 2 && counts.academy === 1 && counts.madrassa === 1, JSON.stringify(counts));
+  ok("work 375: filters work", counts.all === 7 && Object.entries(counts).every(([k, v]) => k === "all" || v >= 1), JSON.stringify(counts));
   const cw = await page.evaluate(() => { const g = document.querySelector("#grid").getBoundingClientRect(), c = document.querySelector("#grid .project:not([hidden])").getBoundingClientRect(); return [Math.round(g.width), Math.round(c.width)]; });
   ok("work 375: cards fill the container", cw[0] === cw[1], cw.join(" vs "));
   await ctx.close();

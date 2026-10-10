@@ -21,7 +21,18 @@ export const systems: Record<string, string> = {
   "real-estate": "Real estate",
   invoicing: "Invoicing and stock",
   madrassa: "Madrassa",
+  commerce: "Commerce",
+  "brand-site": "Brand & motion",
 };
+
+// Editorial capabilities index (homepage). Each row: title, one-line description, small capability list.
+export const capabilities = [
+  ["Software Engineering", "Production systems built to be maintained, not demoed.", ["Architecture", "APIs & data models", "Deployment & hosting"]],
+  ["Digital Products", "Consumer and staff-facing products with a point of view.", ["Web apps", "POS & ordering", "Commerce"]],
+  ["Business Systems", "The operational backbone: records, workflows and reporting.", ["ERP & admin", "Invoicing & stock", "Attendance & CRM"]],
+  ["Web Experiences", "Brand sites and platforms where the craft is visible.", ["CMS-driven sites", "Motion & scroll", "Art direction"]],
+  ["Product Design", "Interfaces designed around the workflow people actually use.", ["UI systems", "Workflow design", "Design handoff"]],
+] as const;
 
 // "" = not provided yet (shows a placeholder pill); null = deliberately omitted (no pill).
 export const team = [

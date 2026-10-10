@@ -67,6 +67,7 @@ import Logo from "./Logo.astro";
       try { sessionStorage.setItem('ag-loaded', '1'); } catch (e) {}
       h.classList.remove('is-loading');   // the page's own entrance animations start now
       el.classList.add('is-leaving');
+      try { d.dispatchEvent(new CustomEvent('cf:loader:leave')); } catch (e) {}
       setTimeout(function () {
         if (el.parentNode) el.parentNode.removeChild(el);
       }, 1500);

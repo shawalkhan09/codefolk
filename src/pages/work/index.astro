@@ -10,7 +10,7 @@ import { systems } from "../../site";
   <section class="sec">
     <div class="chips" role="group" aria-label="Filter by system">
       <button class="chip" type="button" data-filter="all" aria-pressed="true">All systems</button>
-      {Object.entries(systems).map(([k, v]) => <button class="chip" type="button" data-filter={k} aria-pressed="false">{v}</button>)}
+      {Object.entries(systems).filter(([k]) => projects.some((p) => p.system === k || (p.systems || []).includes(k))).map(([k, v]) => <button class="chip" type="button" data-filter={k} aria-pressed="false">{v}</button>)}
     </div>
     <div class="grid2" id="grid">{projects.map((p) => <ProjectCard project={p} level={2} />)}</div>
     <p class="empty" id="empty" hidden={projects.length > 0}>{projects.length ? "No projects in this category yet." : "Projects are being added. Check back soon."}</p>
