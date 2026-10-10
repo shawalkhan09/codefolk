@@ -34,8 +34,17 @@ const cleared = p.permission === "cleared";
 
   <section class="panel">
     <div class="glow g-blue anim" aria-hidden="true"></div>
-    <p class="eyebrow">Results</p>
-    <div class="results reveal">{p.results.map((r) => <div><div class="n"><Txt s={r.value} /></div><div class="l"><Txt s={r.label} /></div></div>)}</div>
+    <div class="results-head">
+      <p class="eyebrow">Results</p>
+      <span class="results-status">Delivery signals / {p.results.length ? "01" : "Built for use"}</span>
+    </div>
+    {p.results.length
+      ? <div class="results reveal">{p.results.map((r) => <div><div class="n"><Txt s={r.value} /></div><div class="l"><Txt s={r.label} /></div></div>)}</div>
+      : <div class="results results--fallback reveal">
+          <div><span class="result-mark">↗</span><div class="l">A clearer workflow for the people doing the work.</div></div>
+          <div><span class="result-mark">◌</span><div class="l">A system shaped around the business, not a generic template.</div></div>
+          <div><span class="result-mark">+</span><div class="l">A dependable foundation ready for the next stage.</div></div>
+        </div>}
     <figure class="quote reveal" style="margin-inline:0">
       {p.quote
         ? <><p>“{p.quote.text}”</p><cite>{p.quote.attribution}</cite></>
